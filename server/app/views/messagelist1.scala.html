@@ -1,0 +1,40 @@
+@* messagelist1 template file *@
+@(username: String, personalMessages: Seq[String], genMessages: Seq[String])(implicit request: RequestHeader, flash: Flash)
+
+@main("Message Board") { <!-- why are keywords not highlighted??? -->
+    <h2> Message Board - General Messages</h2>
+    <h5>General Messages</h5>
+    <ul> 
+        @for(message <- genMessages){
+            <li>@message</li> 
+        }
+    </ul>
+    <h5>Personal Messages</h5>
+    <ul> 
+        @for(message <- personalMessages){
+            <li>@message</li> 
+        }
+    </ul>
+
+
+    <form method = "post" action = "@routes.MessageList1.addMessage">
+        @helper.CSRF.formField
+        <h5>Use this to type in a general message that everyone can see:</h5>
+        <input type = "text" name = "newMessage" placeholder="General message"> </input>
+        <input type = "submit"></input>
+    </form>
+
+    <form method = "post" action = "@routes.MessageList1.sendMessage">
+        @helper.CSRF.formField
+        <h5>Type in a recipient's username and the message you want to send them</h5>
+        <input type = "text" name = "recipientUsername" placeholder="recipient"> </input>
+        <input type = "text" name = "sentMessage" placeholder="message"> </input>
+        <input type = "submit"></input>
+    </form>
+
+    <br>
+    <h5>If you do not log out, you cannot log into any other users!</h5>
+    <div>
+        <a href="@routes.MessageList1.logout">Logout</a>
+    </div>
+}

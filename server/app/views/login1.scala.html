@@ -1,0 +1,37 @@
+@*Login template file*@
+
+@()(implicit request: RequestHeader, flash: Flash)
+@main("Login"){
+    <h2>Login Page</h2>
+    <br>
+    <!--
+    <h2>Login with GET - unsecure</h2>
+    <form method ="get" action = "validateGet1">
+        Username: <input type = "text" name="username"></input>
+        <br>
+        Password: <input type = "password" name="password"></input>
+        <br>
+        <input type = "submit"></input>
+    </form>
+-->
+    <br>
+    <h3>Login with POST - secure</h3>
+    <form method ="post" action = "@routes.MessageList1.validateLoginPost">
+        @helper.CSRF.formField
+        Username: <input type = "text" name="username" id="username-login"></input>
+        <br>
+        Password: <input type = "password" name="password" id="password-login"></input>
+        <br>
+        <input type = "submit">
+    </form>
+
+    <h3>Create User</h3>
+    <form method ="post" action = "@routes.MessageList1.createUser">
+        @helper.CSRF.formField
+        Username: <input type = "text" name="username" id="username-create"></input>
+        <br>
+        Password: <input type = "password" name="password" id="password-create"></input>
+        <br>
+        <input type = "submit">
+    </form>
+}
